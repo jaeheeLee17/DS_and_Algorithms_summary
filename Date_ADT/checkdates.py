@@ -10,7 +10,7 @@ def main():
     date = promptAndExtractDate()
     while date is not None:
         if date <= bornBefore:
-            print("Is at least 21 years of age: ", Date)
+            print("Is at least 21 years of age: ", date)
         date = promptAndExtractDate()
 
     # Prompts for and extracts the Gregorian date components.

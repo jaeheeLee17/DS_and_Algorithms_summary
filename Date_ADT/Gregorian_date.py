@@ -59,19 +59,22 @@ class Date:
     # TODO : Returns the number of days as a positive integer
     # between this date and the otherDate
     def numDays(self, otherDate):
-        pass
+        return abs(self._julianDay - otherDate._julianDay)
 
     # TODO : Determines if this date falls in a leap year and
     # Returns the appropriate boolean value.
     def isLeapYear(self):
-        pass
+        year = self.year()
+        return False if year < 0 else ((year % 4 == 0 and year % 100 != 0) or year % 400 == 0)
 
     # TODO : Advances the date by the given number of days.
     # The date is incremented if days is positive and
     # decremented if the days is negative.
     # The date is capped to November 24, 4714 BC, if necessary.
     def advanceBy(self, days):
-        pass
+        self._julianDay += days
+        year, month, day = self._toGregorian()
+        return "%04d/%02d/%02d" % (year, month, day)
 
     # Returns the Gregorian date as a tuple: (year, month, day).
     def _toGregorian(self):
@@ -99,5 +102,6 @@ class Date:
             return_code = False
         return return_code
 
-firstDay = Date(2006, 9, 1)
-print(firstDay)
+# firstDay = Date(2006, 9, 1)
+# otherDay = Date(2008, 10, 27)
+# print(firstDay.advanceBy(1099))
