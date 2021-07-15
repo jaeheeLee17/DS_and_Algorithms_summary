@@ -1,0 +1,4 @@
+The most basic structure for storing and accessing a collection of data is the array.
+Arrays can be used to solve a wide range of problems in computer science.
+Most programming languages provide this structured data type as a primitive and allow for the creation of arrays with multiple dimensions. 
+In this chapter, we implement an array structure for a one-dimensional array and then use it to implement a two-dimensional array and the related matrix structure.
