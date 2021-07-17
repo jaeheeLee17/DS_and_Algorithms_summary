@@ -25,13 +25,13 @@ def main():
                 + "same courses.")
             for course in sameCourses:
                 print(course)
-        uniqueCourses = smith.difference(roberts)
-        if len(uniqueCourses) == 0:
-            print("Smith and Roberts are taking the same courses.")
-        else:
+        uniqueCourses = iter(smith.difference(roberts))
+        try:
             print("Smith and Roberts are taking some of the " \
                 + "different courses.")
             for course in uniqueCourses:
                 print(course)
+        except StopIteration:
+            print("Smith and Roberts are taking the same courses.")
 
 main()
