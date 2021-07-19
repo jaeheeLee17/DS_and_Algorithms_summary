@@ -27,7 +27,11 @@ class Set:
         if len(self) != len(setB):
             return False
         else:
-            return self.isSubsetOf(setB)
+            # return self.isSubsetOf(setB)
+            for i in range(len(self)):
+                if self._theElements[i] != setB._theElements[i]:
+                    return False
+            return True
 
     # Determines if this set is a subset of setB
     def isSubsetOf(self, setB):
@@ -38,11 +42,38 @@ class Set:
 
     # Creates a new set from the union of this set and setB
     def union(self, setB):
+        '''
         newSet = Set()
         newSet._theElements.extend(self._theElements)
         for element in setB:
             if element not in self:
                 newSet._theElements.append(element)
+        return newSet
+        '''
+        newSet = Set()
+        a, b = 0, 0
+        # Merge the two lists together until one is empty.
+        while a < len(self) and b < len(setB):
+            valueA = self._theElements[a]
+            valueB = self._theElements[b]
+            if valueA < valueB:
+                newSet._theElements.append(valueA)
+                a += 1
+            elif valueA > valueB:
+                newSet._theElements.append(valueB)
+                b += 1
+            else:   # Only one of the two duplicates are appended.
+                newSet._theElements.append(valueA)
+                a += 1
+                b += 1
+        # If listA contains more items, append them to newList
+        while a < len(self):
+            newSet._theElements.append(self._theElements[a])
+            a += 1
+        # Or if listB contains more items, append them to newList
+        while b < len(setB):
+            newSet._theElements.append(setB._theElements[b])
+            b += 1
         return newSet
 
     # TODO: Creates a new set from the intersection: self set and setB.
@@ -65,6 +96,20 @@ class Set:
     # Returns an iterator for traversing the list of items.
     def __iter__(self):
         return _SetIterator(self._theElements)
+
+    # Finds the position of the element within the ordered list..
+    def _findPosition(self, element):
+        start = 0
+        end = len(self) - 1
+        while start <= end:
+            mid = (start + end) // 2
+            if self[mid] == element:
+                return mid
+            elif element < self[mid]:
+                end = mid - 1
+            else:
+                start = mid + 1
+        return start
 
 # An iterator for the Set ADT.
 class _SetIterator:
